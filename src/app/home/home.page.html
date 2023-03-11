@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> My E-commerce App </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/cart" routerDirection="forward">
+        <ion-icon name="cart"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<p style="padding: 10px">Found {{ totalResults }} results.</p>
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-label>Category</ion-label>
+
+      <ion-select
+        [(ngModel)]="selectedCategory"
+        (ionChange)="onSelectCategory()"
+      >
+        <ion-select-option
+          *ngFor="let category of categories"
+          [value]="category"
+          >{{ category }}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <!-- List of products -->
+  <ion-list>
+    <ion-item
+      button
+      *ngFor="let product of products"
+      [routerLink]="['/product-details', product.id]"
+    >
+      <ion-thumbnail slot="start">
+        <img [src]="product.image" />
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ product.title }}</h2>
+        <p>{{ product.description }}</p>
+        <p>Price: {{ product.price | currency }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Shopping Cart</ion-title>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-button routerLink="/home" routerDirection="back">
+          <ion-icon name="arrow-back"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-title>Cart</ion-title>
+    </ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of cartItems$ | async">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <img [src]="item.image" alt="Product Image" />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{ item.title }}</h2>
+          <p>Price: {{ item.price | currency}}</p>
+
+          <ion-button (click)="decrementQuantity(item)">-</ion-button>
+          <ion-note slot="start"> {{item.quantity}} </ion-note>
+          <ion-button (click)="incrementQuantity(item)">+</ion-button>
+        </ion-label>
+        <ion-badge slot="start"> {{item.quantity}} </ion-badge>
+        <ion-icon
+          name="trash-outline"
+          color="danger"
+          (click)="removeItem(item)"
+          slot="end"
+          size="small"
+        ></ion-icon>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-text
+    *ngIf="cartItems && cartItems.length === 0"
+    class="empty-cart"
+    style="padding-bottom: 10px"
+  >
+    Your cart is empty.
+  </ion-text>
+  <div class="total" style="padding-top: 10px">
+    Total: {{ cartService.getTotalAmount() | currency }}
+  </div>
+
+  <ion-button
+    expand="block"
+    color="primary"
+    (click)="checkout()"
+    style="padding-top: 10px"
+  >
+    Checkout
+  </ion-button>
+</ion-content>
