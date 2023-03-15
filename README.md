@@ -18,4 +18,5 @@ Follow the following steps to launch the E-commerce App in **Android Emulator** 
 6. Enter "ionic capacitor sync android" to synchronizes the native project with the web app project for an Android platform.
 7. Enter "npx cap open android" to launch the Android Studio.
 8. Lastly, run the project in Android Studio to open up the Android Emulator.
+
 Note : Make sure you have your Android Emulator installed in Android Studio. 
